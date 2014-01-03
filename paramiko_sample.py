@@ -27,6 +27,10 @@ if __name__ == '__main__':
         # ファイルを転送
         sftp_connection.put('load_from_mysql.py', 'load_from_mysql.py')
         sftp_connection.put('secrets.py', 'secrets.py')
+        command = 'python load_from_mysql.py'
+        (stdin, stdout, stderr) = client.exec_command(command)
+        for line in stdout.readlines():
+            print(line)
 
     except:
         raise
