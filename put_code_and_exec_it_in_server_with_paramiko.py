@@ -3,6 +3,7 @@ from __future__ import print_function
 from __future__ import unicode_literals
 import paramiko
 import secrets
+import filenames
 
 if __name__ == '__main__':
 
@@ -20,9 +21,10 @@ if __name__ == '__main__':
         # sftp_connection.get('test.py', 'test.py')
 
         # ファイルを転送
-        sftp_connection.put('load_from_mysql.py', 'load_from_mysql.py')
-        sftp_connection.put('secrets.py', 'secrets.py')
-        command = 'python load_from_mysql.py'
+        put_filenames = [filenames.code_executed_in_server, filenames.password_and_etc, filenames.sql_commands]
+        for filename in put_filenames:
+            sftp_connection.put(filename, filename)
+        command = 'python %s' % filenames.code_executed_in_server
         (stdin, stdout, stderr) = client.exec_command(command)
         for line in stdout.readlines():
             print(line)
