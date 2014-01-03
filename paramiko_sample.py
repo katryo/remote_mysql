@@ -11,10 +11,9 @@ if __name__ == '__main__':
     try:
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        print('try connect!')
-
+        print('try connecting...')
         client.connect(hostname=secrets.hostname, port=secrets.port, username=secrets.username, password=secrets.password)
-        print('connect!!!!')
+        print('connected!')
         sftp_connection = client.open_sftp()
 
         # ホームディレクトリのファイル一覧をprint
@@ -23,10 +22,11 @@ if __name__ == '__main__':
             print(remote_file)
 
         # ファイルを取得
-        sftp_connection.get('test.py', 'test.py')
+        # sftp_connection.get('test.py', 'test.py')
 
         # ファイルを転送
-        # sftp_connection.put('/path/to/localfile', '/path/to/remote')
+        sftp_connection.put('load_from_mysql.py', 'load_from_mysql.py')
+        sftp_connection.put('secrets.py', 'secrets.py')
 
     except:
         raise
