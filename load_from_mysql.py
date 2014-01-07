@@ -14,7 +14,7 @@ if __name__ == '__main__':
     cursor.execute(sql_commands.sample_2) 
     result = cursor.fetchall()
     for row in result:
-        print(row)
+        print(row[0] + row[1] + str(row[2]) + row[3])
 
     cursor.close()
     connection.close()

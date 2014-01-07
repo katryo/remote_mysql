@@ -41,7 +41,7 @@ if __name__ == '__main__':
         # コマンドをサーバ側で実行
         command = 'python %s' % filenames.code_executed_in_server
         (stdin, stdout, stderr) = client.exec_command(command)
-        for std_io in [stdin, stdout, stderr]:
+        for std_io in [stdout, stderr]:
             for line in std_io.readlines():
                 print(line)
 
