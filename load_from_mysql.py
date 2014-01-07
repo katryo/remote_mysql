@@ -5,13 +5,16 @@ import MySQLdb
 import secrets
 import sql_commands
 
-connection = MySQLdb.connect(db=secrets.db_name, user=secrets.db_root_user, passwd=secrets.db_password, charset='utf8')
 
-cursor = connection.cursor()
-cursor.execute(sql_commands.sample_2)
-result = cursor.fetchall()
-for row in result:
-    print(row[0] + row[1] + str(row[2]) + row[3])
+if __name__ == '__main__':
+    connection = MySQLdb.connect(db=secrets.db_name, user=secrets.db_username, passwd=secrets.db_password, charset='utf8')
+    cursor = connection.cursor()
 
-cursor.close()
-connection.close()
+    # SQLコマンドの文字列は自由に書き換えてOK
+    cursor.execute(sql_commands.sample_2) 
+    result = cursor.fetchall()
+    for row in result:
+        print(row)
+
+    cursor.close()
+    connection.close()
